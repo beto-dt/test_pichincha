@@ -13,7 +13,7 @@ const getItems = async (req, res) => {
         const data = await personsModel.findAll();
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_GET_ITEMS')
+        handleHttpError(res,'ERROR_GET_ITEMS',e)
     }
 };
 
@@ -23,13 +23,12 @@ const getItems = async (req, res) => {
  * @param {*} res 
  */
 const getItem = async (req, res) => {
-
     try{
         const id = req.params.id;
         const data = await personsModel.findById(id);
         res.send({ data });
     }catch(e){
-        handleHttpError(res,"ERROR_GET_ITEM")
+        handleHttpError(res,"ERROR_GET_ITEM",e)
     }
 };
 
@@ -45,7 +44,7 @@ const createItem = async (req, res) => {
         const data = await personsModel.create(body);
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_CREATE_ITEMS')
+        handleHttpError(res,'ERROR_CREATE_ITEMS',e)
     }
 };
 
@@ -54,14 +53,32 @@ const createItem = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const updateItem = async (req, res) => {};
+const updateItem = async (req, res) => {
+    try{
+        const body = req.body;
+        const id = req.params.id;
+        const data = await personsModel.update(body,{where:{ id : id}})
+        res.send({data})
+    }catch(e){
+        handleHttpError(res,'ERROR_UPDATE_ITEMS',e)
+    }
+};
 
 /**
  * Delete a register
  * @param {*} req 
  * @param {*} res 
  */
-const deleteItem = async (req, res) => {};
+const deleteItem = async (req, res) => {
+    try{
+        const id = req.params.id;
+        const data = await personsModel.destroy({where:{ id : id}})
+        res.send({data})
+    }catch(e){
+        handleHttpError(res,'ERROR_DELETE_ITEMS',e)
+
+    }
+};
 
 
 module.exports = { getItems,getItem,createItem,updateItem,deleteItem };
