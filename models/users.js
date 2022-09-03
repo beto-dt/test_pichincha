@@ -11,7 +11,7 @@ const User = sequelize.define(
             type: DataTypes.STRING,
         },
         password:{
-            type: DataTypes.NUMBER,
+            type: DataTypes.STRING,
         },
         status:{
             type: DataTypes.BOOLEAN,
@@ -20,6 +20,9 @@ const User = sequelize.define(
     {
         timestamps: true,
     }
-)
+);
+
+User.find = User.findAll;
+User.findById = User.findByPk;
 
 module.exports = User;
