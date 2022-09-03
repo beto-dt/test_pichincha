@@ -27,6 +27,9 @@ const Person = sequelize.define(
     {
         timestamps: true,
     }
-)
+);
+
+Person.find = Person.findAll;
+Person.findById = Person.findByPk;
 
 module.exports = Person;

@@ -1,4 +1,6 @@
-const { personsModel } = require('../models')
+const { personsModel } = require('../models');
+const { handleHttpError } = require('../utils/handleError');
+const { matchedData } = require('express-validator');
 
 /**
  * Get list of the database
@@ -7,8 +9,12 @@ const { personsModel } = require('../models')
  */
 
 const getItems = async (req, res) => {
-    const data = await personsModel.findAll();
-    res.send({data})
+    try{
+        const data = await personsModel.findAll();
+        res.send({data})
+    }catch(e){
+        handleHttpError(res,'ERROR_GET_ITEMS')
+    }
 };
 
 /**
@@ -16,7 +22,16 @@ const getItems = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const getItem = (req, res) => {};
+const getItem = async (req, res) => {
+
+    try{
+        const id = req.params.id;
+        const data = await personsModel.findById(id);
+        res.send({ data });
+    }catch(e){
+        handleHttpError(res,"ERROR_GET_ITEM")
+    }
+};
 
 /**
  * Insert a register
@@ -25,9 +40,13 @@ const getItem = (req, res) => {};
  */
 
 const createItem = async (req, res) => {
-    const { body } = req;
-    const data = await personsModel.create(body);
-    res.send({data})
+    try{
+        const body = matchedData(req);
+        const data = await personsModel.create(body);
+        res.send({data})
+    }catch(e){
+        handleHttpError(res,'ERROR_CREATE_ITEMS')
+    }
 };
 
 /**
@@ -35,14 +54,14 @@ const createItem = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const updateItem = (req, res) => {};
+const updateItem = async (req, res) => {};
 
 /**
  * Delete a register
  * @param {*} req 
  * @param {*} res 
  */
-const deleteItem = (req, res) => {};
+const deleteItem = async (req, res) => {};
 
 
 module.exports = { getItems,getItem,createItem,updateItem,deleteItem };

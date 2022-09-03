@@ -4,11 +4,23 @@ const { getItems, getItem, createItem } = require("../controllers/persons");
 const customHeader = require("../middleware/CustomHeader");
 const router = express.Router();
 
-//TODO https://localhost/persons GET, POST, DELETE, PUT
-
+/**
+ * List to Items
+ */
 router.get("/",getItems);
 
-router.post("/",validatorCreateItem, customHeader, createItem);
+/**
+ * Get detail of item
+ */
+
+router.get("/:id", getItem);
+
+
+/**
+ * Create a item
+ */
+
+router.post("/",validatorCreateItem, createItem);
 
 
 module.exports = router;

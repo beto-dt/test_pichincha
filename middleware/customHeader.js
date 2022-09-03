@@ -5,7 +5,7 @@ const customHeader = (req, res, next) => {
             next();
         } else {
             res.status(403);
-            res.send({error:"API_KEY_NO_ES_CORRECTA"});
+            res.send({error:"API_KEY_NO_ES_CORRECTA "});
         }
     } catch(e){
         res.status(403);
