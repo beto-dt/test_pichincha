@@ -43,7 +43,7 @@ const loginUser = async(req, res) => {
         if(!check){
             handleHttpError(res,'PASSWORD_INVALID',e)
         }
-       
+
         user.set('password', undefined, {strict:false})
         const data = {
             token: await tokenSign(user),

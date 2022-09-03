@@ -1,7 +1,6 @@
 const { personsModel } = require('../models');
 const { handleHttpError } = require('../utils/handleError');
 const { matchedData } = require('express-validator');
-
 /**
  * Get list of the database
  * @param {*} req 

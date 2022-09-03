@@ -3,11 +3,12 @@ const { validatorCreateItem } = require("../validators/persons");
 const { getItems, getItem, createItem, updateItem, deleteItem } = require("../controllers/persons");
 const customHeader = require("../middleware/CustomHeader");
 const router = express.Router();
+const { authMiddleware } = require('../middleware/session')
 
 /**
  * List to Items
  */
-router.get("/",getItems);
+router.get("/", getItems);
 
 /**
  * Get detail of item
