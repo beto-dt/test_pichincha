@@ -8,7 +8,7 @@ const { authMiddleware } = require('../middleware/session')
 /**
  * List to Items
  */
-router.get("/", getItems);
+router.get("/", authMiddleware, getItems);
 
 /**
  * Get detail of item

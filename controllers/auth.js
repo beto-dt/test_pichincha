@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
         }
         res.send({data});
     }catch(e){
-        handleHttpError(res,'ERROR_REGISTER_USER',e)
+        handleHttpError(res,'ERROR_REGISTER_USER')
     }
 };
 /**
@@ -33,7 +33,7 @@ const loginUser = async(req, res) => {
     try{
         const user = await usersModel.findOne({where:{email:req.body.email}});
         if(!user){
-            handleHttpError(res,'USER_NOT_EXISTS',e)
+            handleHttpError(res,'USER_NOT_EXISTS')
             return
         }
 
@@ -41,7 +41,7 @@ const loginUser = async(req, res) => {
         console.log(hashPassword);
         const check = await compare(req.body.password, hashPassword)
         if(!check){
-            handleHttpError(res,'PASSWORD_INVALID',e)
+            handleHttpError(res,'PASSWORD_INVALID')
         }
 
         user.set('password', undefined, {strict:false})
@@ -52,14 +52,14 @@ const loginUser = async(req, res) => {
 
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_LOGIN_USER',e)
+        handleHttpError(res,'ERROR_LOGIN_USER')
     }
 }
 
 /**
  * Update a register
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  */
  const updateLogin = async (req, res) => {
     try{
@@ -68,14 +68,14 @@ const loginUser = async(req, res) => {
         const data = await usersModel.update(body,{where:{ id : id}})
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_UPDATE_ITEMS',e)
+        handleHttpError(res,'ERROR_UPDATE_ITEMS')
     }
 };
 
 /**
  * Delete a register
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  */
 const deleteLogin = async (req, res) => {
     try{
@@ -83,7 +83,7 @@ const deleteLogin = async (req, res) => {
         const data = await usersModel.destroy({where:{ id : id}})
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_DELETE_ITEMS',e)
+        handleHttpError(res,'ERROR_DELETE_ITEMS')
 
     }
 };

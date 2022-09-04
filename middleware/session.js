@@ -1,22 +1,26 @@
+const { usersModel } = require('../models');
 const { handleHttpError } = require('../utils/handleError');
 const { verifyToken } = require('../utils/handleJwt');
 
-const authMiddleware = async (res, req, next) => {
+const authMiddleware = (req, res, next) => {
     try{
         if(!req.headers.authorization){
             handleHttpError(res, "NEED_SESSION", 401);
-            return
         }
 
         const token = req.headers.authorization.split(' ').pop();
 
-        const dataToken = await verifyToken(token);
+        const dataToken =  verifyToken(token);
 
-        if(!dataToken.id){
+        if(!dataToken){
             handleHttpError(res, "NOT_PAYLOAD_DATA", 401);
-            return
         }
 
+
+        dataToken.then(async (data) => {
+            const user = await  usersModel.findByPk(data.person_id);
+            req.user =  user.id;
+        });
         next();
 
     }catch(e){
