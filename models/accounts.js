@@ -23,6 +23,9 @@ const Account = sequelize.define(
     {
         timestamps: true,
     }
-)
+);
+
+Account.find = Account.findAll;
+Account.findById = Account.findByPk;
 
 module.exports = Account;

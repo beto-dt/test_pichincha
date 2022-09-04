@@ -23,6 +23,9 @@ const Transaction = sequelize.define(
     {
         timestamps: true,
     }
-)
+);
+
+Transaction.find = Transaction.findAll;
+Transaction.findById = Transaction.findByPk;
 
 module.exports = Transaction;

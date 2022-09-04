@@ -9,5 +9,4 @@ router.post("/login", loginUser )
 router.put("/:id", updateLogin )
 router.delete("/:id", deleteLogin )
 
-
 module.exports = router;
