@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./app.js",
     "dev": "nodemon ./app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cross-env NODE_ENV=test  jest"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,15 @@
     "sequelize": "^6.21.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "cross-env": "^7.0.3",
+    "jest": "^29.0.2",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
+  },
+  "jest": {
+    "testEnviroment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
