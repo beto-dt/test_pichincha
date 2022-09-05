@@ -3,9 +3,13 @@ const { registerUser, loginUser, updateLogin, deleteLogin } = require('../contro
 const { authMiddleware } = require('../middleware/session');
 const router = express.Router();
 
-router.post("/register", registerUser )
-router.post("/login", loginUser )
-router.put("/:id", authMiddleware, updateLogin )
-router.delete("/:id", authMiddleware, deleteLogin )
+/**Create User */
+router.post("/register", registerUser );
+/**Login User */
+router.post("/login", loginUser );
+/**Update User */
+router.put("/:id", authMiddleware, updateLogin );
+/**Delete User */
+router.delete("/:id", authMiddleware, deleteLogin );
 
 module.exports = router;

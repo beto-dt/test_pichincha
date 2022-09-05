@@ -1,7 +1,7 @@
 const { usersModel } = require('../models');
 const { handleHttpError } = require('../utils/handleError');
 const { encrypt, compare } = require('../utils/handlePassword');
-const { tokenSign, verifyToken } = require('../utils/handleJwt');
+const { tokenSign } = require('../utils/handleJwt');
 
 /**
  * Register Users
@@ -61,7 +61,7 @@ const loginUser = async(req, res) => {
  * @param {*} req
  * @param {*} res
  */
- const updateLogin = async (req, res) => {
+const updateLogin = async (req, res) => {
     try{
         const body = req.body;
         const id = req.params.id;
@@ -84,7 +84,6 @@ const deleteLogin = async (req, res) => {
         res.send({data})
     }catch(e){
         handleHttpError(res,'ERROR_DELETE_ITEMS')
-
     }
 };
 

@@ -28,7 +28,6 @@ const getTransaction = async (req, res) => {
         res.send({ data });
 };
 
-
 const createTransactionWithdrawalOrDeposit = async (req, res) => {
     const id = req.user.id;
     const transaction_type = req.body.transaction_type;

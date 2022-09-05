@@ -1,12 +1,11 @@
 const { accountsModel } = require('../models');
 const { handleHttpError } = require('../utils/handleError');
-const { matchedData } = require('express-validator');
+
 /**
  * Get list of the database
  * @param {*} req
  * @param {*} res
  */
-
 const getAccounts = async (req, res) => {
     try{
         const data = await accountsModel.findAll();
