@@ -14,25 +14,25 @@ router.get("/", authMiddleware, getItems);
  * Get detail of item
  */
 
-router.get("/:id", getItem);
+router.get("/:id",authMiddleware, getItem);
 
 /**
  * Create a item
  */
 
-router.post("/",validatorCreateItem, createItem);
+router.post("/",validatorCreateItem, authMiddleware, createItem);
 
 /**
  * Update a item
  */
 
-router.put("/:id", updateItem);
+router.put("/:id", authMiddleware,  updateItem);
 
 /**
  * Delete a item
  */
 
-router.delete("/:id", deleteItem);
+router.delete("/:id", authMiddleware, deleteItem);
 
 
 

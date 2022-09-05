@@ -23,11 +23,16 @@ const getAccounts = async (req, res) => {
  */
 const getAccount = async (req, res) => {
     try{
-        const id = req.params.id;
-        const data = await accountsModel.findById(id);
+        const id = req.user.id;
+        const data = await accountsModel.findOne({where:{user_id:id}});
+        if(data == null ){
+            handleHttpError(res,"ERROR_NO_EXIST_ACCOUNT");
+        }
+        else {
         res.send({ data });
+        }
     }catch(e){
-        handleHttpError(res,"ERROR_GET_ITEM",e)
+        handleHttpError(res,"ERROR_GET_ITEM")
     }
 };
 
@@ -49,32 +54,32 @@ const createAccount = async (req, res) => {
 
 /**
  * Update a register
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  */
 const updateAccount = async (req, res) => {
     try{
         const body = req.body;
-        const id = req.params.id;
-        const data = await accountsModel.update(body,{where:{ id : id}})
+        const id = req.user.id;
+        const data = await accountsModel.update(body,{where:{ user_id : id}})
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_UPDATE_ITEMS',e)
+        handleHttpError(res,'ERROR_UPDATE_ITEMS')
     }
 };
 
 /**
  * Delete a register
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  */
 const deleteAccount = async (req, res) => {
     try{
-        const id = req.params.id;
-        const data = await accountsModel.destroy({where:{ id : id}})
+        const id = req.user.id;
+        const data = await accountsModel.destroy({where:{ user_id : id}})
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_DELETE_ITEMS',e)
+        handleHttpError(res,'ERROR_DELETE_ITEMS')
 
     }
 };
