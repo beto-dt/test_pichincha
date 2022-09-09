@@ -11,7 +11,7 @@ const getAccounts = async (req, res) => {
         const data = await accountsModel.findAll();
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_GET_ITEMS',e)
+        handleHttpError(res,'ERROR_GET_ITEMS')
     }
 };
 
@@ -47,7 +47,7 @@ const createAccount = async (req, res) => {
         const data = await accountsModel.create(body);
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_CREATE_ITEMS',e)
+        handleHttpError(res,'ERROR_CREATE_ITEMS')
     }
 };
 
