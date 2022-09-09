@@ -4,19 +4,25 @@ const { DataTypes } = require('sequelize');
 const Account = sequelize.define(
     "accounts",
     {
-        n_account:{
+        name:{
             type: DataTypes.INTEGER,
         },
-        type:{
+        lastname:{
             type: DataTypes.STRING,
         },
-        initial_balance:{
+        email:{
             type: DataTypes.STRING,
         },
-        status:{
+        password:{
             type: DataTypes.BOOLEAN,
         },
-        user_id:{
+        phone:{
+            type: DataTypes.INTEGER,
+        },
+        ci:{
+            type: DataTypes.INTEGER,
+        },
+        status:{
             type: DataTypes.INTEGER,
         }
     },

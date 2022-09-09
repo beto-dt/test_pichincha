@@ -14,9 +14,8 @@ const port = process.env.PORT || 3000;
 //TODO https://localhost/api/___________
 app.use("/api/v1",require('./routes'));
 
-if(NODE_ENV !== 'test'){
     app.listen(port);
-}
+
 
 dbConnectMySql();
 
