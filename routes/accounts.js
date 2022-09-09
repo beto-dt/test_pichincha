@@ -3,7 +3,7 @@ const { getAccounts, getAccount, createAccount, updateAccount, deleteAccount } =
 const { authMiddleware } = require("../middleware/session");
 const router = express.Router();
 /**Get Accounts */
-router.get("/", getAccounts);
+router.get("/", authMiddleware, getAccounts);
 /**Get Account */
 router.get("/user",authMiddleware, getAccount);
 /**Create Account */

@@ -23,7 +23,7 @@ const getAccounts = async (req, res) => {
 const getAccount = async (req, res) => {
     try{
         const id = req.user.id;
-        const data = await accountsModel.findOne({where:{user_id:id}});
+        const data = await accountsModel.find({where:{user_id:id}});
         if(data == null ){
             handleHttpError(res,"ERROR_NO_EXIST_ACCOUNT");
         }

@@ -18,8 +18,8 @@ const getItems = async (req, res) => {
 
 /**
  * Get a Detail
- * @param {*} req 
- * @param {*} res 
+ * @param {*} req
+ * @param {*} res
  */
 const getItem = async (req, res) => {
     try{

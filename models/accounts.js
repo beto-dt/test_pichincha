@@ -11,7 +11,7 @@ const Account = sequelize.define(
             type: DataTypes.STRING,
         },
         initial_balance:{
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
         },
         status:{
             type: DataTypes.BOOLEAN,
