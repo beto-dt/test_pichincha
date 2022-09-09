@@ -18,6 +18,9 @@ const Transaction = sequelize.define(
         },
         account_id:{
             type: DataTypes.INTEGER,
+        },
+        status:{
+            type: DataTypes.BOOLEAN,
         }
     },
     {

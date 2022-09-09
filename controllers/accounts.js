@@ -59,8 +59,8 @@ const createAccount = async (req, res) => {
 const updateAccount = async (req, res) => {
     try{
         const body = req.body;
-        const id = req.user.id;
-        const data = await accountsModel.update(body,{where:{ user_id : id}})
+        const id = req.params.id;
+        const data = await accountsModel.update(body,{where:{ id : id}})
         res.send({data})
     }catch(e){
         handleHttpError(res,'ERROR_UPDATE_ITEMS')
@@ -74,12 +74,12 @@ const updateAccount = async (req, res) => {
  */
 const deleteAccount = async (req, res) => {
     try{
-        const id = req.user.id;
-        const data = await accountsModel.destroy({where:{ user_id : id}})
+        const body = req.body;
+        const id = req.params.id;
+        const data = await accountsModel.update(body,{where:{ id : id}})
         res.send({data})
     }catch(e){
         handleHttpError(res,'ERROR_DELETE_ITEMS')
-
     }
 };
 

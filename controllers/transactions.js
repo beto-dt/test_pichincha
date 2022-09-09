@@ -10,10 +10,11 @@ const { QueryTypes } = require('sequelize');
 
 const getTransactions = async (req, res) => {
     try{
-        const data = await transactionsModel.findAll();
+        const id = req.user.id;
+        const data = await transactionsModel.sequelize.query(`SELECT transactions.* from transactions INNER JOIN accounts ON transactions.account_id = accounts.id INNER JOIN users ON accounts.user_id = users.id INNER JOIN persons ON users.person_id = persons.id WHERE users.id = ${id}`,{ type: QueryTypes.SELECT });
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_GET_ITEMS',e)
+        handleHttpError(res,'ERROR_GET_ITEMS')
     }
 };
 
@@ -23,9 +24,13 @@ const getTransactions = async (req, res) => {
  * @param {*} res
  */
 const getTransaction = async (req, res) => {
+    try{
         const id = req.user.id;
         const data = await transactionsModel.sequelize.query(`SELECT * FROM transactions INNER JOIN accounts on transactions.account_id = accounts.id WHERE accounts.user_id = ${id}`, { type: QueryTypes.SELECT });
         res.send({ data });
+    }catch(e){
+        handleHttpError(res,'ERROR_GET_ITEM');
+    }
 };
 
 const createTransactionWithdrawalOrDeposit = async (req, res) => {
@@ -49,20 +54,18 @@ const createTransactionWithdrawalOrDeposit = async (req, res) => {
     }
 };
 
-
 /**
  * Insert a register
  * @param {*} req
  * @param {*} res
  */
-
 const createTransactions = async (req, res) => {
     try{
         const body = req.body;
         const data = await transactionsModel.create(body);
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_CREATE_ITEMS',e)
+        handleHttpError(res,'ERROR_CREATE_ITEMS')
     }
 };
 
@@ -78,7 +81,7 @@ const updateTransactions = async (req, res) => {
         const data = await transactionsModel.update(body,{where:{ id : id}})
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_UPDATE_ITEMS',e)
+        handleHttpError(res,'ERROR_UPDATE_ITEMS')
     }
 };
 
@@ -89,11 +92,12 @@ const updateTransactions = async (req, res) => {
  */
 const deleteTransactions = async (req, res) => {
     try{
+        const body = req.body;
         const id = req.params.id;
-        const data = await transactionsModel.destroy({where:{ id : id}})
+        const data = await transactionsModel.update(body, {where:{ id : id}})
         res.send({data})
     }catch(e){
-        handleHttpError(res,'ERROR_DELETE_ITEMS',e)
+        handleHttpError(res,'ERROR_DELETE_ITEMS')
 
     }
 };
